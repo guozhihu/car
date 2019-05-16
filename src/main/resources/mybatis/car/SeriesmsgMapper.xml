@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdou.car.business.car.dal.persistence.SeriesmsgMapper" >
+  <resultMap id="BaseResultMap" type="com.gdou.car.business.car.dal.entitys.Seriesmsg" >
+    <id column="seriesId" property="seriesid" jdbcType="VARCHAR" />
+    <result column="carPhoto" property="carphoto" jdbcType="VARCHAR" />
+    <result column="productionDate" property="productiondate" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="availableCount" property="availablecount" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seriesId, carPhoto, productionDate, level, availableCount, price
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdou.car.business.car.dal.entitys.SeriesmsgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from seriesmsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from seriesmsg
+    where seriesId = #{seriesid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from seriesmsg
+    where seriesId = #{seriesid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdou.car.business.car.dal.entitys.SeriesmsgExample" >
+    delete from seriesmsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdou.car.business.car.dal.entitys.Seriesmsg" >
+    insert into seriesmsg (seriesId, carPhoto, productionDate, 
+      level, availableCount, price
+      )
+    values (#{seriesid,jdbcType=VARCHAR}, #{carphoto,jdbcType=VARCHAR}, #{productiondate,jdbcType=VARCHAR}, 
+      #{level,jdbcType=VARCHAR}, #{availablecount,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdou.car.business.car.dal.entitys.Seriesmsg" >
+    insert into seriesmsg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seriesid != null" >
+        seriesId,
+      </if>
+      <if test="carphoto != null" >
+        carPhoto,
+      </if>
+      <if test="productiondate != null" >
+        productionDate,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="availablecount != null" >
+        availableCount,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seriesid != null" >
+        #{seriesid,jdbcType=VARCHAR},
+      </if>
+      <if test="carphoto != null" >
+        #{carphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="productiondate != null" >
+        #{productiondate,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="availablecount != null" >
+        #{availablecount,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdou.car.business.car.dal.entitys.SeriesmsgExample" resultType="java.lang.Integer" >
+    select count(*) from seriesmsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update seriesmsg
+    <set >
+      <if test="record.seriesid != null" >
+        seriesId = #{record.seriesid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carphoto != null" >
+        carPhoto = #{record.carphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productiondate != null" >
+        productionDate = #{record.productiondate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.availablecount != null" >
+        availableCount = #{record.availablecount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update seriesmsg
+    set seriesId = #{record.seriesid,jdbcType=VARCHAR},
+      carPhoto = #{record.carphoto,jdbcType=VARCHAR},
+      productionDate = #{record.productiondate,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=VARCHAR},
+      availableCount = #{record.availablecount,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdou.car.business.car.dal.entitys.Seriesmsg" >
+    update seriesmsg
+    <set >
+      <if test="carphoto != null" >
+        carPhoto = #{carphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="productiondate != null" >
+        productionDate = #{productiondate,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="availablecount != null" >
+        availableCount = #{availablecount,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where seriesId = #{seriesid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdou.car.business.car.dal.entitys.Seriesmsg" >
+    update seriesmsg
+    set carPhoto = #{carphoto,jdbcType=VARCHAR},
+      productionDate = #{productiondate,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      availableCount = #{availablecount,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR}
+    where seriesId = #{seriesid,jdbcType=VARCHAR}
+  </update>
+</mapper>

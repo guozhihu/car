@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdou.car.business.order.dal.persistence.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.gdou.car.business.order.dal.entitys.Order" >
+    <id column="userId" property="userid" jdbcType="VARCHAR" />
+    <id column="seriesId" property="seriesid" jdbcType="VARCHAR" />
+    <result column="driverName" property="drivername" jdbcType="VARCHAR" />
+    <result column="driverPhone" property="driverphone" jdbcType="VARCHAR" />
+    <result column="IDcardNum" property="idcardnum" jdbcType="VARCHAR" />
+    <result column="orderGetDate" property="ordergetdate" jdbcType="VARCHAR" />
+    <result column="orderBackDate" property="orderbackdate" jdbcType="VARCHAR" />
+    <result column="totalPrice" property="totalprice" jdbcType="VARCHAR" />
+    <result column="penalty" property="penalty" jdbcType="VARCHAR" />
+    <result column="rentStyle" property="rentstyle" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    userId, seriesId, driverName, driverPhone, IDcardNum, orderGetDate, orderBackDate, 
+    totalPrice, penalty, rentStyle
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdou.car.business.order.dal.entitys.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.gdou.car.business.order.dal.entitys.OrderKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where userId = #{userid,jdbcType=VARCHAR}
+      and seriesId = #{seriesid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.gdou.car.business.order.dal.entitys.OrderKey" >
+    delete from order
+    where userId = #{userid,jdbcType=VARCHAR}
+      and seriesId = #{seriesid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdou.car.business.order.dal.entitys.OrderExample" >
+    delete from order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdou.car.business.order.dal.entitys.Order" >
+    insert into order (userId, seriesId, driverName, 
+      driverPhone, IDcardNum, orderGetDate, 
+      orderBackDate, totalPrice, penalty, 
+      rentStyle)
+    values (#{userid,jdbcType=VARCHAR}, #{seriesid,jdbcType=VARCHAR}, #{drivername,jdbcType=VARCHAR}, 
+      #{driverphone,jdbcType=VARCHAR}, #{idcardnum,jdbcType=VARCHAR}, #{ordergetdate,jdbcType=VARCHAR}, 
+      #{orderbackdate,jdbcType=VARCHAR}, #{totalprice,jdbcType=VARCHAR}, #{penalty,jdbcType=VARCHAR}, 
+      #{rentstyle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdou.car.business.order.dal.entitys.Order" >
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="seriesid != null" >
+        seriesId,
+      </if>
+      <if test="drivername != null" >
+        driverName,
+      </if>
+      <if test="driverphone != null" >
+        driverPhone,
+      </if>
+      <if test="idcardnum != null" >
+        IDcardNum,
+      </if>
+      <if test="ordergetdate != null" >
+        orderGetDate,
+      </if>
+      <if test="orderbackdate != null" >
+        orderBackDate,
+      </if>
+      <if test="totalprice != null" >
+        totalPrice,
+      </if>
+      <if test="penalty != null" >
+        penalty,
+      </if>
+      <if test="rentstyle != null" >
+        rentStyle,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesid != null" >
+        #{seriesid,jdbcType=VARCHAR},
+      </if>
+      <if test="drivername != null" >
+        #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="driverphone != null" >
+        #{driverphone,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardnum != null" >
+        #{idcardnum,jdbcType=VARCHAR},
+      </if>
+      <if test="ordergetdate != null" >
+        #{ordergetdate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderbackdate != null" >
+        #{orderbackdate,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null" >
+        #{totalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="penalty != null" >
+        #{penalty,jdbcType=VARCHAR},
+      </if>
+      <if test="rentstyle != null" >
+        #{rentstyle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdou.car.business.order.dal.entitys.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order
+    <set >
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seriesid != null" >
+        seriesId = #{record.seriesid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drivername != null" >
+        driverName = #{record.drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.driverphone != null" >
+        driverPhone = #{record.driverphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcardnum != null" >
+        IDcardNum = #{record.idcardnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordergetdate != null" >
+        orderGetDate = #{record.ordergetdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderbackdate != null" >
+        orderBackDate = #{record.orderbackdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalprice != null" >
+        totalPrice = #{record.totalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.penalty != null" >
+        penalty = #{record.penalty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rentstyle != null" >
+        rentStyle = #{record.rentstyle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order
+    set userId = #{record.userid,jdbcType=VARCHAR},
+      seriesId = #{record.seriesid,jdbcType=VARCHAR},
+      driverName = #{record.drivername,jdbcType=VARCHAR},
+      driverPhone = #{record.driverphone,jdbcType=VARCHAR},
+      IDcardNum = #{record.idcardnum,jdbcType=VARCHAR},
+      orderGetDate = #{record.ordergetdate,jdbcType=VARCHAR},
+      orderBackDate = #{record.orderbackdate,jdbcType=VARCHAR},
+      totalPrice = #{record.totalprice,jdbcType=VARCHAR},
+      penalty = #{record.penalty,jdbcType=VARCHAR},
+      rentStyle = #{record.rentstyle,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdou.car.business.order.dal.entitys.Order" >
+    update order
+    <set >
+      <if test="drivername != null" >
+        driverName = #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="driverphone != null" >
+        driverPhone = #{driverphone,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardnum != null" >
+        IDcardNum = #{idcardnum,jdbcType=VARCHAR},
+      </if>
+      <if test="ordergetdate != null" >
+        orderGetDate = #{ordergetdate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderbackdate != null" >
+        orderBackDate = #{orderbackdate,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null" >
+        totalPrice = #{totalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="penalty != null" >
+        penalty = #{penalty,jdbcType=VARCHAR},
+      </if>
+      <if test="rentstyle != null" >
+        rentStyle = #{rentstyle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=VARCHAR}
+      and seriesId = #{seriesid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdou.car.business.order.dal.entitys.Order" >
+    update order
+    set driverName = #{drivername,jdbcType=VARCHAR},
+      driverPhone = #{driverphone,jdbcType=VARCHAR},
+      IDcardNum = #{idcardnum,jdbcType=VARCHAR},
+      orderGetDate = #{ordergetdate,jdbcType=VARCHAR},
+      orderBackDate = #{orderbackdate,jdbcType=VARCHAR},
+      totalPrice = #{totalprice,jdbcType=VARCHAR},
+      penalty = #{penalty,jdbcType=VARCHAR},
+      rentStyle = #{rentstyle,jdbcType=VARCHAR}
+    where userId = #{userid,jdbcType=VARCHAR}
+      and seriesId = #{seriesid,jdbcType=VARCHAR}
+  </update>
+</mapper>

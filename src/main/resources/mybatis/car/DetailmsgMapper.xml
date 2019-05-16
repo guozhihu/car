@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdou.car.business.car.dal.persistence.DetailmsgMapper" >
+  <resultMap id="BaseResultMap" type="com.gdou.car.business.car.dal.entitys.Detailmsg" >
+    <id column="seriesId" property="seriesid" jdbcType="VARCHAR" />
+    <result column="seriesName" property="seriesname" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="seat" property="seat" jdbcType="VARCHAR" />
+    <result column="doors" property="doors" jdbcType="VARCHAR" />
+    <result column="transmission" property="transmission" jdbcType="VARCHAR" />
+    <result column="displacement" property="displacement" jdbcType="VARCHAR" />
+    <result column="fuel" property="fuel" jdbcType="VARCHAR" />
+    <result column="gps" property="gps" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seriesId, seriesName, color, seat, doors, transmission, displacement, fuel, gps
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdou.car.business.car.dal.entitys.DetailmsgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from detailmsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from detailmsg
+    where seriesId = #{seriesid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from detailmsg
+    where seriesId = #{seriesid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdou.car.business.car.dal.entitys.DetailmsgExample" >
+    delete from detailmsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdou.car.business.car.dal.entitys.Detailmsg" >
+    insert into detailmsg (seriesId, seriesName, color, 
+      seat, doors, transmission, 
+      displacement, fuel, gps
+      )
+    values (#{seriesid,jdbcType=VARCHAR}, #{seriesname,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{seat,jdbcType=VARCHAR}, #{doors,jdbcType=VARCHAR}, #{transmission,jdbcType=VARCHAR}, 
+      #{displacement,jdbcType=VARCHAR}, #{fuel,jdbcType=VARCHAR}, #{gps,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdou.car.business.car.dal.entitys.Detailmsg" >
+    insert into detailmsg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seriesid != null" >
+        seriesId,
+      </if>
+      <if test="seriesname != null" >
+        seriesName,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="seat != null" >
+        seat,
+      </if>
+      <if test="doors != null" >
+        doors,
+      </if>
+      <if test="transmission != null" >
+        transmission,
+      </if>
+      <if test="displacement != null" >
+        displacement,
+      </if>
+      <if test="fuel != null" >
+        fuel,
+      </if>
+      <if test="gps != null" >
+        gps,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seriesid != null" >
+        #{seriesid,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesname != null" >
+        #{seriesname,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null" >
+        #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="doors != null" >
+        #{doors,jdbcType=VARCHAR},
+      </if>
+      <if test="transmission != null" >
+        #{transmission,jdbcType=VARCHAR},
+      </if>
+      <if test="displacement != null" >
+        #{displacement,jdbcType=VARCHAR},
+      </if>
+      <if test="fuel != null" >
+        #{fuel,jdbcType=VARCHAR},
+      </if>
+      <if test="gps != null" >
+        #{gps,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdou.car.business.car.dal.entitys.DetailmsgExample" resultType="java.lang.Integer" >
+    select count(*) from detailmsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update detailmsg
+    <set >
+      <if test="record.seriesid != null" >
+        seriesId = #{record.seriesid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seriesname != null" >
+        seriesName = #{record.seriesname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null" >
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seat != null" >
+        seat = #{record.seat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doors != null" >
+        doors = #{record.doors,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transmission != null" >
+        transmission = #{record.transmission,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displacement != null" >
+        displacement = #{record.displacement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fuel != null" >
+        fuel = #{record.fuel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gps != null" >
+        gps = #{record.gps,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update detailmsg
+    set seriesId = #{record.seriesid,jdbcType=VARCHAR},
+      seriesName = #{record.seriesname,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      seat = #{record.seat,jdbcType=VARCHAR},
+      doors = #{record.doors,jdbcType=VARCHAR},
+      transmission = #{record.transmission,jdbcType=VARCHAR},
+      displacement = #{record.displacement,jdbcType=VARCHAR},
+      fuel = #{record.fuel,jdbcType=VARCHAR},
+      gps = #{record.gps,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdou.car.business.car.dal.entitys.Detailmsg" >
+    update detailmsg
+    <set >
+      <if test="seriesname != null" >
+        seriesName = #{seriesname,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null" >
+        seat = #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="doors != null" >
+        doors = #{doors,jdbcType=VARCHAR},
+      </if>
+      <if test="transmission != null" >
+        transmission = #{transmission,jdbcType=VARCHAR},
+      </if>
+      <if test="displacement != null" >
+        displacement = #{displacement,jdbcType=VARCHAR},
+      </if>
+      <if test="fuel != null" >
+        fuel = #{fuel,jdbcType=VARCHAR},
+      </if>
+      <if test="gps != null" >
+        gps = #{gps,jdbcType=BIT},
+      </if>
+    </set>
+    where seriesId = #{seriesid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdou.car.business.car.dal.entitys.Detailmsg" >
+    update detailmsg
+    set seriesName = #{seriesname,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      seat = #{seat,jdbcType=VARCHAR},
+      doors = #{doors,jdbcType=VARCHAR},
+      transmission = #{transmission,jdbcType=VARCHAR},
+      displacement = #{displacement,jdbcType=VARCHAR},
+      fuel = #{fuel,jdbcType=VARCHAR},
+      gps = #{gps,jdbcType=BIT}
+    where seriesId = #{seriesid,jdbcType=VARCHAR}
+  </update>
+</mapper>

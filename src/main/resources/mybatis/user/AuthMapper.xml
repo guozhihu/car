@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdou.car.business.user.dal.persistence.AuthMapper" >
+  <resultMap id="BaseResultMap" type="com.gdou.car.business.user.dal.entitys.Auth" >
+    <id column="auth_id" property="authId" jdbcType="INTEGER" />
+    <result column="auth_name" property="authName" jdbcType="VARCHAR" />
+    <result column="auth_pid" property="authPid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    auth_id, auth_name, auth_pid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdou.car.business.user.dal.entitys.AuthExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from auth
+    where auth_id = #{authId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from auth
+    where auth_id = #{authId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdou.car.business.user.dal.entitys.AuthExample" >
+    delete from auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdou.car.business.user.dal.entitys.Auth" >
+    insert into auth (auth_id, auth_name, auth_pid
+      )
+    values (#{authId,jdbcType=INTEGER}, #{authName,jdbcType=VARCHAR}, #{authPid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdou.car.business.user.dal.entitys.Auth" >
+    insert into auth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="authId != null" >
+        auth_id,
+      </if>
+      <if test="authName != null" >
+        auth_name,
+      </if>
+      <if test="authPid != null" >
+        auth_pid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="authId != null" >
+        #{authId,jdbcType=INTEGER},
+      </if>
+      <if test="authName != null" >
+        #{authName,jdbcType=VARCHAR},
+      </if>
+      <if test="authPid != null" >
+        #{authPid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdou.car.business.user.dal.entitys.AuthExample" resultType="java.lang.Integer" >
+    select count(*) from auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update auth
+    <set >
+      <if test="record.authId != null" >
+        auth_id = #{record.authId,jdbcType=INTEGER},
+      </if>
+      <if test="record.authName != null" >
+        auth_name = #{record.authName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authPid != null" >
+        auth_pid = #{record.authPid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update auth
+    set auth_id = #{record.authId,jdbcType=INTEGER},
+      auth_name = #{record.authName,jdbcType=VARCHAR},
+      auth_pid = #{record.authPid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdou.car.business.user.dal.entitys.Auth" >
+    update auth
+    <set >
+      <if test="authName != null" >
+        auth_name = #{authName,jdbcType=VARCHAR},
+      </if>
+      <if test="authPid != null" >
+        auth_pid = #{authPid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where auth_id = #{authId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdou.car.business.user.dal.entitys.Auth" >
+    update auth
+    set auth_name = #{authName,jdbcType=VARCHAR},
+      auth_pid = #{authPid,jdbcType=INTEGER}
+    where auth_id = #{authId,jdbcType=INTEGER}
+  </update>
+</mapper>
