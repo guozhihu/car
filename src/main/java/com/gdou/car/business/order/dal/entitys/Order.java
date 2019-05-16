@@ -2,7 +2,11 @@ package com.gdou.car.business.order.dal.entitys;
 
 import java.io.Serializable;
 
-public class Order extends OrderKey implements Serializable {
+public class Order implements Serializable {
+    private Long userId;
+
+    private String seriesid;
+
     private String drivername;
 
     private String driverphone;
@@ -20,6 +24,22 @@ public class Order extends OrderKey implements Serializable {
     private String rentstyle;
 
     private static final long serialVersionUID = 1L;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getSeriesid() {
+        return seriesid;
+    }
+
+    public void setSeriesid(String seriesid) {
+        this.seriesid = seriesid == null ? null : seriesid.trim();
+    }
 
     public String getDrivername() {
         return drivername;
@@ -91,6 +111,8 @@ public class Order extends OrderKey implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
+        sb.append(", userId=").append(userId);
+        sb.append(", seriesid=").append(seriesid);
         sb.append(", drivername=").append(drivername);
         sb.append(", driverphone=").append(driverphone);
         sb.append(", idcardnum=").append(idcardnum);

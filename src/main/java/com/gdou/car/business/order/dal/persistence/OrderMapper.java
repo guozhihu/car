@@ -2,7 +2,6 @@ package com.gdou.car.business.order.dal.persistence;
 
 import com.gdou.car.business.order.dal.entitys.Order;
 import com.gdou.car.business.order.dal.entitys.OrderExample;
-import com.gdou.car.business.order.dal.entitys.OrderKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +12,7 @@ public interface OrderMapper {
 
     int deleteByExample(OrderExample example);
 
-    int deleteByPrimaryKey(OrderKey key);
+    int deleteByPrimaryKey(Long userId);
 
     int insert(Order record);
 
@@ -21,7 +20,7 @@ public interface OrderMapper {
 
     List<Order> selectByExample(OrderExample example);
 
-    Order selectByPrimaryKey(OrderKey key);
+    Order selectByPrimaryKey(Long userId);
 
     int updateByExampleSelective(@Param("record") Order record, @Param("example") OrderExample example);
 
