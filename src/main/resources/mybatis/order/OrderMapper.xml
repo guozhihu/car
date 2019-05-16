@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gdou.car.business.order.dal.persistence.OrderMapper" >
   <resultMap id="BaseResultMap" type="com.gdou.car.business.order.dal.entitys.Order" >
-    <id column="userId" property="userid" jdbcType="VARCHAR" />
-    <id column="seriesId" property="seriesid" jdbcType="VARCHAR" />
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="seriesId" property="seriesid" jdbcType="VARCHAR" />
     <result column="driverName" property="drivername" jdbcType="VARCHAR" />
     <result column="driverPhone" property="driverphone" jdbcType="VARCHAR" />
     <result column="IDcardNum" property="idcardnum" jdbcType="VARCHAR" />
@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    userId, seriesId, driverName, driverPhone, IDcardNum, orderGetDate, orderBackDate, 
+    user_id, seriesId, driverName, driverPhone, IDcardNum, orderGetDate, orderBackDate, 
     totalPrice, penalty, rentStyle
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdou.car.business.order.dal.entitys.OrderExample" >
@@ -92,17 +92,15 @@
       limit ${limitStart} , ${pageSize}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.gdou.car.business.order.dal.entitys.OrderKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from order
-    where userId = #{userid,jdbcType=VARCHAR}
-      and seriesId = #{seriesid,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.gdou.car.business.order.dal.entitys.OrderKey" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from order
-    where userId = #{userid,jdbcType=VARCHAR}
-      and seriesId = #{seriesid,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.gdou.car.business.order.dal.entitys.OrderExample" >
     delete from order
@@ -111,11 +109,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gdou.car.business.order.dal.entitys.Order" >
-    insert into order (userId, seriesId, driverName, 
+    insert into order (user_id, seriesId, driverName, 
       driverPhone, IDcardNum, orderGetDate, 
       orderBackDate, totalPrice, penalty, 
       rentStyle)
-    values (#{userid,jdbcType=VARCHAR}, #{seriesid,jdbcType=VARCHAR}, #{drivername,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=BIGINT}, #{seriesid,jdbcType=VARCHAR}, #{drivername,jdbcType=VARCHAR}, 
       #{driverphone,jdbcType=VARCHAR}, #{idcardnum,jdbcType=VARCHAR}, #{ordergetdate,jdbcType=VARCHAR}, 
       #{orderbackdate,jdbcType=VARCHAR}, #{totalprice,jdbcType=VARCHAR}, #{penalty,jdbcType=VARCHAR}, 
       #{rentstyle,jdbcType=VARCHAR})
@@ -123,8 +121,8 @@
   <insert id="insertSelective" parameterType="com.gdou.car.business.order.dal.entitys.Order" >
     insert into order
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userid != null" >
-        userId,
+      <if test="userId != null" >
+        user_id,
       </if>
       <if test="seriesid != null" >
         seriesId,
@@ -155,8 +153,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userid != null" >
-        #{userid,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
       </if>
       <if test="seriesid != null" >
         #{seriesid,jdbcType=VARCHAR},
@@ -196,8 +194,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update order
     <set >
-      <if test="record.userid != null" >
-        userId = #{record.userid,jdbcType=VARCHAR},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.seriesid != null" >
         seriesId = #{record.seriesid,jdbcType=VARCHAR},
@@ -233,7 +231,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update order
-    set userId = #{record.userid,jdbcType=VARCHAR},
+    set user_id = #{record.userId,jdbcType=BIGINT},
       seriesId = #{record.seriesid,jdbcType=VARCHAR},
       driverName = #{record.drivername,jdbcType=VARCHAR},
       driverPhone = #{record.driverphone,jdbcType=VARCHAR},
@@ -250,6 +248,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.gdou.car.business.order.dal.entitys.Order" >
     update order
     <set >
+      <if test="seriesid != null" >
+        seriesId = #{seriesid,jdbcType=VARCHAR},
+      </if>
       <if test="drivername != null" >
         driverName = #{drivername,jdbcType=VARCHAR},
       </if>
@@ -275,12 +276,12 @@
         rentStyle = #{rentstyle,jdbcType=VARCHAR},
       </if>
     </set>
-    where userId = #{userid,jdbcType=VARCHAR}
-      and seriesId = #{seriesid,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.gdou.car.business.order.dal.entitys.Order" >
     update order
-    set driverName = #{drivername,jdbcType=VARCHAR},
+    set seriesId = #{seriesid,jdbcType=VARCHAR},
+      driverName = #{drivername,jdbcType=VARCHAR},
       driverPhone = #{driverphone,jdbcType=VARCHAR},
       IDcardNum = #{idcardnum,jdbcType=VARCHAR},
       orderGetDate = #{ordergetdate,jdbcType=VARCHAR},
@@ -288,7 +289,6 @@
       totalPrice = #{totalprice,jdbcType=VARCHAR},
       penalty = #{penalty,jdbcType=VARCHAR},
       rentStyle = #{rentstyle,jdbcType=VARCHAR}
-    where userId = #{userid,jdbcType=VARCHAR}
-      and seriesId = #{seriesid,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>
