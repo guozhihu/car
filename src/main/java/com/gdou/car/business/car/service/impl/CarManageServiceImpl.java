@@ -1,6 +1,6 @@
 package com.gdou.car.business.car.service.impl;
 
-import com.gdou.car.business.car.service.CarCoreService;
+import com.gdou.car.business.car.service.CarManagerService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Service;
  * Date: Create in 2019/5/16 10:15
  */
 @Service
-public class CarCoreServiceImpl implements CarCoreService {
+public class CarManageServiceImpl implements CarManagerService {
 }
