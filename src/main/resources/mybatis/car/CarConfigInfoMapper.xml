@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdou.car.business.car.dal.persistence.CarConfigInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.gdou.car.business.car.dal.entitys.CarConfigInfo" >
+    <id column="car_id" property="carId" jdbcType="VARCHAR" />
+    <result column="seat_num" property="seatNum" jdbcType="INTEGER" />
+    <result column="doors_num" property="doorsNum" jdbcType="INTEGER" />
+    <result column="fuel_type" property="fuelType" jdbcType="VARCHAR" />
+    <result column="gearbox_type" property="gearboxType" jdbcType="VARCHAR" />
+    <result column="displacement" property="displacement" jdbcType="INTEGER" />
+    <result column="fuel_label" property="fuelLabel" jdbcType="VARCHAR" />
+    <result column="drive_mode" property="driveMode" jdbcType="VARCHAR" />
+    <result column="engine_intake_form" property="engineIntakeForm" jdbcType="VARCHAR" />
+    <result column="skylight" property="skylight" jdbcType="VARCHAR" />
+    <result column="mailbox_capacity" property="mailboxCapacity" jdbcType="INTEGER" />
+    <result column="speaker" property="speaker" jdbcType="INTEGER" />
+    <result column="seat" property="seat" jdbcType="VARCHAR" />
+    <result column="reversing_radar" property="reversingRadar" jdbcType="VARCHAR" />
+    <result column="air_bag" property="airBag" jdbcType="INTEGER" />
+    <result column="dvd_cd" property="dvdCd" jdbcType="VARCHAR" />
+    <result column="gps_navigation" property="gpsNavigation" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    car_id, seat_num, doors_num, fuel_type, gearbox_type, displacement, fuel_label, drive_mode, 
+    engine_intake_form, skylight, mailbox_capacity, speaker, seat, reversing_radar, air_bag, 
+    dvd_cd, gps_navigation
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdou.car.business.car.dal.entitys.CarConfigInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car_config_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_config_info
+    where car_id = #{carId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car_config_info
+    where car_id = #{carId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdou.car.business.car.dal.entitys.CarConfigInfoExample" >
+    delete from car_config_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdou.car.business.car.dal.entitys.CarConfigInfo" >
+    insert into car_config_info (car_id, seat_num, doors_num, 
+      fuel_type, gearbox_type, displacement, 
+      fuel_label, drive_mode, engine_intake_form, 
+      skylight, mailbox_capacity, speaker, 
+      seat, reversing_radar, air_bag, 
+      dvd_cd, gps_navigation)
+    values (#{carId,jdbcType=VARCHAR}, #{seatNum,jdbcType=INTEGER}, #{doorsNum,jdbcType=INTEGER}, 
+      #{fuelType,jdbcType=VARCHAR}, #{gearboxType,jdbcType=VARCHAR}, #{displacement,jdbcType=INTEGER}, 
+      #{fuelLabel,jdbcType=VARCHAR}, #{driveMode,jdbcType=VARCHAR}, #{engineIntakeForm,jdbcType=VARCHAR}, 
+      #{skylight,jdbcType=VARCHAR}, #{mailboxCapacity,jdbcType=INTEGER}, #{speaker,jdbcType=INTEGER}, 
+      #{seat,jdbcType=VARCHAR}, #{reversingRadar,jdbcType=VARCHAR}, #{airBag,jdbcType=INTEGER}, 
+      #{dvdCd,jdbcType=VARCHAR}, #{gpsNavigation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdou.car.business.car.dal.entitys.CarConfigInfo" >
+    insert into car_config_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="seatNum != null" >
+        seat_num,
+      </if>
+      <if test="doorsNum != null" >
+        doors_num,
+      </if>
+      <if test="fuelType != null" >
+        fuel_type,
+      </if>
+      <if test="gearboxType != null" >
+        gearbox_type,
+      </if>
+      <if test="displacement != null" >
+        displacement,
+      </if>
+      <if test="fuelLabel != null" >
+        fuel_label,
+      </if>
+      <if test="driveMode != null" >
+        drive_mode,
+      </if>
+      <if test="engineIntakeForm != null" >
+        engine_intake_form,
+      </if>
+      <if test="skylight != null" >
+        skylight,
+      </if>
+      <if test="mailboxCapacity != null" >
+        mailbox_capacity,
+      </if>
+      <if test="speaker != null" >
+        speaker,
+      </if>
+      <if test="seat != null" >
+        seat,
+      </if>
+      <if test="reversingRadar != null" >
+        reversing_radar,
+      </if>
+      <if test="airBag != null" >
+        air_bag,
+      </if>
+      <if test="dvdCd != null" >
+        dvd_cd,
+      </if>
+      <if test="gpsNavigation != null" >
+        gps_navigation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        #{carId,jdbcType=VARCHAR},
+      </if>
+      <if test="seatNum != null" >
+        #{seatNum,jdbcType=INTEGER},
+      </if>
+      <if test="doorsNum != null" >
+        #{doorsNum,jdbcType=INTEGER},
+      </if>
+      <if test="fuelType != null" >
+        #{fuelType,jdbcType=VARCHAR},
+      </if>
+      <if test="gearboxType != null" >
+        #{gearboxType,jdbcType=VARCHAR},
+      </if>
+      <if test="displacement != null" >
+        #{displacement,jdbcType=INTEGER},
+      </if>
+      <if test="fuelLabel != null" >
+        #{fuelLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="driveMode != null" >
+        #{driveMode,jdbcType=VARCHAR},
+      </if>
+      <if test="engineIntakeForm != null" >
+        #{engineIntakeForm,jdbcType=VARCHAR},
+      </if>
+      <if test="skylight != null" >
+        #{skylight,jdbcType=VARCHAR},
+      </if>
+      <if test="mailboxCapacity != null" >
+        #{mailboxCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="speaker != null" >
+        #{speaker,jdbcType=INTEGER},
+      </if>
+      <if test="seat != null" >
+        #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="reversingRadar != null" >
+        #{reversingRadar,jdbcType=VARCHAR},
+      </if>
+      <if test="airBag != null" >
+        #{airBag,jdbcType=INTEGER},
+      </if>
+      <if test="dvdCd != null" >
+        #{dvdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsNavigation != null" >
+        #{gpsNavigation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdou.car.business.car.dal.entitys.CarConfigInfoExample" resultType="java.lang.Integer" >
+    select count(*) from car_config_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update car_config_info
+    <set >
+      <if test="record.carId != null" >
+        car_id = #{record.carId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seatNum != null" >
+        seat_num = #{record.seatNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.doorsNum != null" >
+        doors_num = #{record.doorsNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.fuelType != null" >
+        fuel_type = #{record.fuelType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gearboxType != null" >
+        gearbox_type = #{record.gearboxType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displacement != null" >
+        displacement = #{record.displacement,jdbcType=INTEGER},
+      </if>
+      <if test="record.fuelLabel != null" >
+        fuel_label = #{record.fuelLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.driveMode != null" >
+        drive_mode = #{record.driveMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engineIntakeForm != null" >
+        engine_intake_form = #{record.engineIntakeForm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skylight != null" >
+        skylight = #{record.skylight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailboxCapacity != null" >
+        mailbox_capacity = #{record.mailboxCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="record.speaker != null" >
+        speaker = #{record.speaker,jdbcType=INTEGER},
+      </if>
+      <if test="record.seat != null" >
+        seat = #{record.seat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reversingRadar != null" >
+        reversing_radar = #{record.reversingRadar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.airBag != null" >
+        air_bag = #{record.airBag,jdbcType=INTEGER},
+      </if>
+      <if test="record.dvdCd != null" >
+        dvd_cd = #{record.dvdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gpsNavigation != null" >
+        gps_navigation = #{record.gpsNavigation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update car_config_info
+    set car_id = #{record.carId,jdbcType=VARCHAR},
+      seat_num = #{record.seatNum,jdbcType=INTEGER},
+      doors_num = #{record.doorsNum,jdbcType=INTEGER},
+      fuel_type = #{record.fuelType,jdbcType=VARCHAR},
+      gearbox_type = #{record.gearboxType,jdbcType=VARCHAR},
+      displacement = #{record.displacement,jdbcType=INTEGER},
+      fuel_label = #{record.fuelLabel,jdbcType=VARCHAR},
+      drive_mode = #{record.driveMode,jdbcType=VARCHAR},
+      engine_intake_form = #{record.engineIntakeForm,jdbcType=VARCHAR},
+      skylight = #{record.skylight,jdbcType=VARCHAR},
+      mailbox_capacity = #{record.mailboxCapacity,jdbcType=INTEGER},
+      speaker = #{record.speaker,jdbcType=INTEGER},
+      seat = #{record.seat,jdbcType=VARCHAR},
+      reversing_radar = #{record.reversingRadar,jdbcType=VARCHAR},
+      air_bag = #{record.airBag,jdbcType=INTEGER},
+      dvd_cd = #{record.dvdCd,jdbcType=VARCHAR},
+      gps_navigation = #{record.gpsNavigation,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdou.car.business.car.dal.entitys.CarConfigInfo" >
+    update car_config_info
+    <set >
+      <if test="seatNum != null" >
+        seat_num = #{seatNum,jdbcType=INTEGER},
+      </if>
+      <if test="doorsNum != null" >
+        doors_num = #{doorsNum,jdbcType=INTEGER},
+      </if>
+      <if test="fuelType != null" >
+        fuel_type = #{fuelType,jdbcType=VARCHAR},
+      </if>
+      <if test="gearboxType != null" >
+        gearbox_type = #{gearboxType,jdbcType=VARCHAR},
+      </if>
+      <if test="displacement != null" >
+        displacement = #{displacement,jdbcType=INTEGER},
+      </if>
+      <if test="fuelLabel != null" >
+        fuel_label = #{fuelLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="driveMode != null" >
+        drive_mode = #{driveMode,jdbcType=VARCHAR},
+      </if>
+      <if test="engineIntakeForm != null" >
+        engine_intake_form = #{engineIntakeForm,jdbcType=VARCHAR},
+      </if>
+      <if test="skylight != null" >
+        skylight = #{skylight,jdbcType=VARCHAR},
+      </if>
+      <if test="mailboxCapacity != null" >
+        mailbox_capacity = #{mailboxCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="speaker != null" >
+        speaker = #{speaker,jdbcType=INTEGER},
+      </if>
+      <if test="seat != null" >
+        seat = #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="reversingRadar != null" >
+        reversing_radar = #{reversingRadar,jdbcType=VARCHAR},
+      </if>
+      <if test="airBag != null" >
+        air_bag = #{airBag,jdbcType=INTEGER},
+      </if>
+      <if test="dvdCd != null" >
+        dvd_cd = #{dvdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsNavigation != null" >
+        gps_navigation = #{gpsNavigation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where car_id = #{carId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdou.car.business.car.dal.entitys.CarConfigInfo" >
+    update car_config_info
+    set seat_num = #{seatNum,jdbcType=INTEGER},
+      doors_num = #{doorsNum,jdbcType=INTEGER},
+      fuel_type = #{fuelType,jdbcType=VARCHAR},
+      gearbox_type = #{gearboxType,jdbcType=VARCHAR},
+      displacement = #{displacement,jdbcType=INTEGER},
+      fuel_label = #{fuelLabel,jdbcType=VARCHAR},
+      drive_mode = #{driveMode,jdbcType=VARCHAR},
+      engine_intake_form = #{engineIntakeForm,jdbcType=VARCHAR},
+      skylight = #{skylight,jdbcType=VARCHAR},
+      mailbox_capacity = #{mailboxCapacity,jdbcType=INTEGER},
+      speaker = #{speaker,jdbcType=INTEGER},
+      seat = #{seat,jdbcType=VARCHAR},
+      reversing_radar = #{reversingRadar,jdbcType=VARCHAR},
+      air_bag = #{airBag,jdbcType=INTEGER},
+      dvd_cd = #{dvdCd,jdbcType=VARCHAR},
+      gps_navigation = #{gpsNavigation,jdbcType=VARCHAR}
+    where car_id = #{carId,jdbcType=VARCHAR}
+  </update>
+</mapper>

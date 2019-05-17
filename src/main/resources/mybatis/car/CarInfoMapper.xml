@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdou.car.business.car.dal.persistence.CarInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.gdou.car.business.car.dal.entitys.CarInfo" >
+    <id column="car_id" property="carId" jdbcType="VARCHAR" />
+    <result column="car_title" property="carTitle" jdbcType="VARCHAR" />
+    <result column="age_style" property="ageStyle" jdbcType="VARCHAR" />
+    <result column="car_configuration" property="carConfiguration" jdbcType="VARCHAR" />
+    <result column="series_name" property="seriesName" jdbcType="VARCHAR" />
+    <result column="bran_id" property="branId" jdbcType="VARCHAR" />
+    <result column="model_id" property="modelId" jdbcType="VARCHAR" />
+    <result column="photo_url" property="photoUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    car_id, car_title, age_style, car_configuration, series_name, bran_id, model_id, 
+    photo_url
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdou.car.business.car.dal.entitys.CarInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_info
+    where car_id = #{carId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car_info
+    where car_id = #{carId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdou.car.business.car.dal.entitys.CarInfoExample" >
+    delete from car_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdou.car.business.car.dal.entitys.CarInfo" >
+    insert into car_info (car_id, car_title, age_style, 
+      car_configuration, series_name, bran_id, 
+      model_id, photo_url)
+    values (#{carId,jdbcType=VARCHAR}, #{carTitle,jdbcType=VARCHAR}, #{ageStyle,jdbcType=VARCHAR}, 
+      #{carConfiguration,jdbcType=VARCHAR}, #{seriesName,jdbcType=VARCHAR}, #{branId,jdbcType=VARCHAR}, 
+      #{modelId,jdbcType=VARCHAR}, #{photoUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdou.car.business.car.dal.entitys.CarInfo" >
+    insert into car_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="carTitle != null" >
+        car_title,
+      </if>
+      <if test="ageStyle != null" >
+        age_style,
+      </if>
+      <if test="carConfiguration != null" >
+        car_configuration,
+      </if>
+      <if test="seriesName != null" >
+        series_name,
+      </if>
+      <if test="branId != null" >
+        bran_id,
+      </if>
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="photoUrl != null" >
+        photo_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        #{carId,jdbcType=VARCHAR},
+      </if>
+      <if test="carTitle != null" >
+        #{carTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ageStyle != null" >
+        #{ageStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="carConfiguration != null" >
+        #{carConfiguration,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null" >
+        #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="branId != null" >
+        #{branId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="photoUrl != null" >
+        #{photoUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdou.car.business.car.dal.entitys.CarInfoExample" resultType="java.lang.Integer" >
+    select count(*) from car_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update car_info
+    <set >
+      <if test="record.carId != null" >
+        car_id = #{record.carId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carTitle != null" >
+        car_title = #{record.carTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ageStyle != null" >
+        age_style = #{record.ageStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carConfiguration != null" >
+        car_configuration = #{record.carConfiguration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seriesName != null" >
+        series_name = #{record.seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branId != null" >
+        bran_id = #{record.branId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelId != null" >
+        model_id = #{record.modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photoUrl != null" >
+        photo_url = #{record.photoUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update car_info
+    set car_id = #{record.carId,jdbcType=VARCHAR},
+      car_title = #{record.carTitle,jdbcType=VARCHAR},
+      age_style = #{record.ageStyle,jdbcType=VARCHAR},
+      car_configuration = #{record.carConfiguration,jdbcType=VARCHAR},
+      series_name = #{record.seriesName,jdbcType=VARCHAR},
+      bran_id = #{record.branId,jdbcType=VARCHAR},
+      model_id = #{record.modelId,jdbcType=VARCHAR},
+      photo_url = #{record.photoUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdou.car.business.car.dal.entitys.CarInfo" >
+    update car_info
+    <set >
+      <if test="carTitle != null" >
+        car_title = #{carTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ageStyle != null" >
+        age_style = #{ageStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="carConfiguration != null" >
+        car_configuration = #{carConfiguration,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null" >
+        series_name = #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="branId != null" >
+        bran_id = #{branId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="photoUrl != null" >
+        photo_url = #{photoUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where car_id = #{carId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdou.car.business.car.dal.entitys.CarInfo" >
+    update car_info
+    set car_title = #{carTitle,jdbcType=VARCHAR},
+      age_style = #{ageStyle,jdbcType=VARCHAR},
+      car_configuration = #{carConfiguration,jdbcType=VARCHAR},
+      series_name = #{seriesName,jdbcType=VARCHAR},
+      bran_id = #{branId,jdbcType=VARCHAR},
+      model_id = #{modelId,jdbcType=VARCHAR},
+      photo_url = #{photoUrl,jdbcType=VARCHAR}
+    where car_id = #{carId,jdbcType=VARCHAR}
+  </update>
+</mapper>
