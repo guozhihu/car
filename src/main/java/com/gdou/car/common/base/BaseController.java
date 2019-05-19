@@ -1,4 +1,4 @@
-package com.gdou.car.web.controller;
+package com.gdou.car.common.base;
 
 /**
  * Author: zhihu

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
  * Description:
  * Date: Create in 2019/5/16 10:14
  */
-@Service
 public interface CarQueryService {
 
 

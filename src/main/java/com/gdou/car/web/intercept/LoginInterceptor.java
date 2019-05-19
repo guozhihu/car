@@ -6,7 +6,7 @@ import com.gdou.car.business.user.service.UserService;
 import com.gdou.car.common.annotation.Anoymous;
 import com.gdou.car.common.constants.WebConstant;
 import com.gdou.car.common.utils.CookieUtil;
-import com.gdou.car.web.controller.BaseController;
+import com.gdou.car.common.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

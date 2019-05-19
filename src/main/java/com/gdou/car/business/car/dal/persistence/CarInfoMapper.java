@@ -5,6 +5,7 @@ import com.gdou.car.business.car.dal.entitys.CarInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface CarInfoMapper {
@@ -23,6 +24,9 @@ public interface CarInfoMapper {
     CarInfo selectByPrimaryKey(String carId);
 
     int updateByExampleSelective(@Param("record") CarInfo record, @Param("example") CarInfoExample example);
+    
+    @Update("UPDATE car_info SET photo_url = #{photoUrl} WHERE car_id = #{carId}")
+    int updatePictureUrl(@Param("carId") String carId, @Param("photoUrl") String photoUrl);
 
     int updateByExample(@Param("record") CarInfo record, @Param("example") CarInfoExample example);
 
