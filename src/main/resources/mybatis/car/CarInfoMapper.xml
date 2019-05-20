@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gdou.car.business.car.dal.persistence.CarInfoMapper" >
   <resultMap id="BaseResultMap" type="com.gdou.car.business.car.dal.entitys.CarInfo" >
-    <id column="car_id" property="carId" jdbcType="VARCHAR" />
+    <id column="car_id" property="carTitle" jdbcType="VARCHAR" />
     <result column="car_title" property="carTitle" jdbcType="VARCHAR" />
     <result column="age_style" property="ageStyle" jdbcType="VARCHAR" />
     <result column="car_configuration" property="carConfiguration" jdbcType="VARCHAR" />
@@ -94,11 +94,11 @@
     select 
     <include refid="Base_Column_List" />
     from car_info
-    where car_id = #{carId,jdbcType=VARCHAR}
+    where car_id = #{carTitle,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from car_info
-    where car_id = #{carId,jdbcType=VARCHAR}
+    where car_id = #{carTitle,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.gdou.car.business.car.dal.entitys.CarInfoExample" >
     delete from car_info
@@ -110,14 +110,14 @@
     insert into car_info (car_id, car_title, age_style, 
       car_configuration, series_name, bran_id, 
       model_id, photo_url)
-    values (#{carId,jdbcType=VARCHAR}, #{carTitle,jdbcType=VARCHAR}, #{ageStyle,jdbcType=VARCHAR}, 
+    values (#{carTitle,jdbcType=VARCHAR}, #{carTitle,jdbcType=VARCHAR}, #{ageStyle,jdbcType=VARCHAR},
       #{carConfiguration,jdbcType=VARCHAR}, #{seriesName,jdbcType=VARCHAR}, #{branId,jdbcType=VARCHAR}, 
       #{modelId,jdbcType=VARCHAR}, #{photoUrl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.gdou.car.business.car.dal.entitys.CarInfo" >
     insert into car_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="carId != null" >
+      <if test="carTitle != null" >
         car_id,
       </if>
       <if test="carTitle != null" >
@@ -143,8 +143,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="carId != null" >
-        #{carId,jdbcType=VARCHAR},
+      <if test="carTitle != null" >
+        #{carTitle,jdbcType=VARCHAR},
       </if>
       <if test="carTitle != null" >
         #{carTitle,jdbcType=VARCHAR},
@@ -178,8 +178,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update car_info
     <set >
-      <if test="record.carId != null" >
-        car_id = #{record.carId,jdbcType=VARCHAR},
+      <if test="record.carTitle != null" >
+        car_id = #{record.carTitle,jdbcType=VARCHAR},
       </if>
       <if test="record.carTitle != null" >
         car_title = #{record.carTitle,jdbcType=VARCHAR},
@@ -209,7 +209,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update car_info
-    set car_id = #{record.carId,jdbcType=VARCHAR},
+    set car_id = #{record.carTitle,jdbcType=VARCHAR},
       car_title = #{record.carTitle,jdbcType=VARCHAR},
       age_style = #{record.ageStyle,jdbcType=VARCHAR},
       car_configuration = #{record.carConfiguration,jdbcType=VARCHAR},
@@ -246,7 +246,7 @@
         photo_url = #{photoUrl,jdbcType=VARCHAR},
       </if>
     </set>
-    where car_id = #{carId,jdbcType=VARCHAR}
+    where car_id = #{carTitle,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.gdou.car.business.car.dal.entitys.CarInfo" >
     update car_info
@@ -257,6 +257,6 @@
       bran_id = #{branId,jdbcType=VARCHAR},
       model_id = #{modelId,jdbcType=VARCHAR},
       photo_url = #{photoUrl,jdbcType=VARCHAR}
-    where car_id = #{carId,jdbcType=VARCHAR}
+    where car_id = #{carTitle,jdbcType=VARCHAR}
   </update>
 </mapper>

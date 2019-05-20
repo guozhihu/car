@@ -3,7 +3,7 @@
 <mapper namespace="com.gdou.car.business.car.dal.persistence.CarReleaseMapper" >
   <resultMap id="BaseResultMap" type="com.gdou.car.business.car.dal.entitys.CarRelease" >
     <id column="release_id" property="releaseId" jdbcType="VARCHAR" />
-    <result column="car_id" property="carId" jdbcType="VARCHAR" />
+    <result column="car_id" property="carTitle" jdbcType="VARCHAR" />
     <result column="location_info_id" property="locationInfoId" jdbcType="VARCHAR" />
     <result column="available_count" property="availableCount" jdbcType="INTEGER" />
   </resultMap>
@@ -104,7 +104,7 @@
   <insert id="insert" parameterType="com.gdou.car.business.car.dal.entitys.CarRelease" >
     insert into car_release (release_id, car_id, location_info_id, 
       available_count)
-    values (#{releaseId,jdbcType=VARCHAR}, #{carId,jdbcType=VARCHAR}, #{locationInfoId,jdbcType=VARCHAR}, 
+    values (#{releaseId,jdbcType=VARCHAR}, #{carTitle,jdbcType=VARCHAR}, #{locationInfoId,jdbcType=VARCHAR},
       #{availableCount,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.gdou.car.business.car.dal.entitys.CarRelease" >
@@ -113,7 +113,7 @@
       <if test="releaseId != null" >
         release_id,
       </if>
-      <if test="carId != null" >
+      <if test="carTitle != null" >
         car_id,
       </if>
       <if test="locationInfoId != null" >
@@ -127,8 +127,8 @@
       <if test="releaseId != null" >
         #{releaseId,jdbcType=VARCHAR},
       </if>
-      <if test="carId != null" >
-        #{carId,jdbcType=VARCHAR},
+      <if test="carTitle != null" >
+        #{carTitle,jdbcType=VARCHAR},
       </if>
       <if test="locationInfoId != null" >
         #{locationInfoId,jdbcType=VARCHAR},
@@ -150,8 +150,8 @@
       <if test="record.releaseId != null" >
         release_id = #{record.releaseId,jdbcType=VARCHAR},
       </if>
-      <if test="record.carId != null" >
-        car_id = #{record.carId,jdbcType=VARCHAR},
+      <if test="record.carTitle != null" >
+        car_id = #{record.carTitle,jdbcType=VARCHAR},
       </if>
       <if test="record.locationInfoId != null" >
         location_info_id = #{record.locationInfoId,jdbcType=VARCHAR},
@@ -167,7 +167,7 @@
   <update id="updateByExample" parameterType="map" >
     update car_release
     set release_id = #{record.releaseId,jdbcType=VARCHAR},
-      car_id = #{record.carId,jdbcType=VARCHAR},
+      car_id = #{record.carTitle,jdbcType=VARCHAR},
       location_info_id = #{record.locationInfoId,jdbcType=VARCHAR},
       available_count = #{record.availableCount,jdbcType=INTEGER}
     <if test="_parameter != null" >
@@ -177,8 +177,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.gdou.car.business.car.dal.entitys.CarRelease" >
     update car_release
     <set >
-      <if test="carId != null" >
-        car_id = #{carId,jdbcType=VARCHAR},
+      <if test="carTitle != null" >
+        car_id = #{carTitle,jdbcType=VARCHAR},
       </if>
       <if test="locationInfoId != null" >
         location_info_id = #{locationInfoId,jdbcType=VARCHAR},
@@ -191,7 +191,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.gdou.car.business.car.dal.entitys.CarRelease" >
     update car_release
-    set car_id = #{carId,jdbcType=VARCHAR},
+    set car_id = #{carTitle,jdbcType=VARCHAR},
       location_info_id = #{locationInfoId,jdbcType=VARCHAR},
       available_count = #{availableCount,jdbcType=INTEGER}
     where release_id = #{releaseId,jdbcType=VARCHAR}

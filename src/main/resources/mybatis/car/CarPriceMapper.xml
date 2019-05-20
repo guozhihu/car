@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gdou.car.business.car.dal.persistence.CarPriceMapper" >
   <resultMap id="BaseResultMap" type="com.gdou.car.business.car.dal.entitys.CarPrice" >
-    <result column="car_id" property="carId" jdbcType="VARCHAR" />
+    <result column="car_id" property="carTitle" jdbcType="VARCHAR" />
     <result column="style_id" property="styleId" jdbcType="INTEGER" />
     <result column="rent_price" property="rentPrice" jdbcType="INTEGER" />
   </resultMap>
@@ -93,13 +93,13 @@
   <insert id="insert" parameterType="com.gdou.car.business.car.dal.entitys.CarPrice" >
     insert into car_price (car_id, style_id, rent_price
       )
-    values (#{carId,jdbcType=VARCHAR}, #{styleId,jdbcType=INTEGER}, #{rentPrice,jdbcType=INTEGER}
+    values (#{carTitle,jdbcType=VARCHAR}, #{styleId,jdbcType=INTEGER}, #{rentPrice,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.gdou.car.business.car.dal.entitys.CarPrice" >
     insert into car_price
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="carId != null" >
+      <if test="carTitle != null" >
         car_id,
       </if>
       <if test="styleId != null" >
@@ -110,8 +110,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="carId != null" >
-        #{carId,jdbcType=VARCHAR},
+      <if test="carTitle != null" >
+        #{carTitle,jdbcType=VARCHAR},
       </if>
       <if test="styleId != null" >
         #{styleId,jdbcType=INTEGER},
@@ -130,8 +130,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update car_price
     <set >
-      <if test="record.carId != null" >
-        car_id = #{record.carId,jdbcType=VARCHAR},
+      <if test="record.carTitle != null" >
+        car_id = #{record.carTitle,jdbcType=VARCHAR},
       </if>
       <if test="record.styleId != null" >
         style_id = #{record.styleId,jdbcType=INTEGER},
@@ -146,7 +146,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update car_price
-    set car_id = #{record.carId,jdbcType=VARCHAR},
+    set car_id = #{record.carTitle,jdbcType=VARCHAR},
       style_id = #{record.styleId,jdbcType=INTEGER},
       rent_price = #{record.rentPrice,jdbcType=INTEGER}
     <if test="_parameter != null" >

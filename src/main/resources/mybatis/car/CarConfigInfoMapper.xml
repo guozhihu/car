@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gdou.car.business.car.dal.persistence.CarConfigInfoMapper" >
   <resultMap id="BaseResultMap" type="com.gdou.car.business.car.dal.entitys.CarConfigInfo" >
-    <id column="car_id" property="carId" jdbcType="VARCHAR" />
+    <id column="car_id" property="carTitle" jdbcType="VARCHAR" />
     <result column="seat_num" property="seatNum" jdbcType="INTEGER" />
     <result column="doors_num" property="doorsNum" jdbcType="INTEGER" />
     <result column="fuel_type" property="fuelType" jdbcType="VARCHAR" />
@@ -104,11 +104,11 @@
     select 
     <include refid="Base_Column_List" />
     from car_config_info
-    where car_id = #{carId,jdbcType=VARCHAR}
+    where car_id = #{carTitle,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from car_config_info
-    where car_id = #{carId,jdbcType=VARCHAR}
+    where car_id = #{carTitle,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.gdou.car.business.car.dal.entitys.CarConfigInfoExample" >
     delete from car_config_info
@@ -123,7 +123,7 @@
       skylight, mailbox_capacity, speaker, 
       seat, reversing_radar, air_bag, 
       dvd_cd, gps_navigation)
-    values (#{carId,jdbcType=VARCHAR}, #{seatNum,jdbcType=INTEGER}, #{doorsNum,jdbcType=INTEGER}, 
+    values (#{carTitle,jdbcType=VARCHAR}, #{seatNum,jdbcType=INTEGER}, #{doorsNum,jdbcType=INTEGER},
       #{fuelType,jdbcType=VARCHAR}, #{gearboxType,jdbcType=VARCHAR}, #{displacement,jdbcType=INTEGER}, 
       #{fuelLabel,jdbcType=VARCHAR}, #{driveMode,jdbcType=VARCHAR}, #{engineIntakeForm,jdbcType=VARCHAR}, 
       #{skylight,jdbcType=VARCHAR}, #{mailboxCapacity,jdbcType=INTEGER}, #{speaker,jdbcType=INTEGER}, 
@@ -133,7 +133,7 @@
   <insert id="insertSelective" parameterType="com.gdou.car.business.car.dal.entitys.CarConfigInfo" >
     insert into car_config_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="carId != null" >
+      <if test="carTitle != null" >
         car_id,
       </if>
       <if test="seatNum != null" >
@@ -186,8 +186,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="carId != null" >
-        #{carId,jdbcType=VARCHAR},
+      <if test="carTitle != null" >
+        #{carTitle,jdbcType=VARCHAR},
       </if>
       <if test="seatNum != null" >
         #{seatNum,jdbcType=INTEGER},
@@ -248,8 +248,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update car_config_info
     <set >
-      <if test="record.carId != null" >
-        car_id = #{record.carId,jdbcType=VARCHAR},
+      <if test="record.carTitle != null" >
+        car_id = #{record.carTitle,jdbcType=VARCHAR},
       </if>
       <if test="record.seatNum != null" >
         seat_num = #{record.seatNum,jdbcType=INTEGER},
@@ -306,7 +306,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update car_config_info
-    set car_id = #{record.carId,jdbcType=VARCHAR},
+    set car_id = #{record.carTitle,jdbcType=VARCHAR},
       seat_num = #{record.seatNum,jdbcType=INTEGER},
       doors_num = #{record.doorsNum,jdbcType=INTEGER},
       fuel_type = #{record.fuelType,jdbcType=VARCHAR},
@@ -379,7 +379,7 @@
         gps_navigation = #{gpsNavigation,jdbcType=VARCHAR},
       </if>
     </set>
-    where car_id = #{carId,jdbcType=VARCHAR}
+    where car_id = #{carTitle,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.gdou.car.business.car.dal.entitys.CarConfigInfo" >
     update car_config_info
@@ -399,6 +399,6 @@
       air_bag = #{airBag,jdbcType=INTEGER},
       dvd_cd = #{dvdCd,jdbcType=VARCHAR},
       gps_navigation = #{gpsNavigation,jdbcType=VARCHAR}
-    where car_id = #{carId,jdbcType=VARCHAR}
+    where car_id = #{carTitle,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -256,72 +256,72 @@ public class CarRentalListExample {
         }
 
         public Criteria andTenantNameIsNull() {
-            addCriterion("\"tenant name\" is null");
+            addCriterion("tenant_name is null");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameIsNotNull() {
-            addCriterion("\"tenant name\" is not null");
+            addCriterion("tenant_name is not null");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameEqualTo(String value) {
-            addCriterion("\"tenant name\" =", value, "tenantName");
+            addCriterion("tenant_name =", value, "tenantName");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameNotEqualTo(String value) {
-            addCriterion("\"tenant name\" <>", value, "tenantName");
+            addCriterion("tenant_name <>", value, "tenantName");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameGreaterThan(String value) {
-            addCriterion("\"tenant name\" >", value, "tenantName");
+            addCriterion("tenant_name >", value, "tenantName");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameGreaterThanOrEqualTo(String value) {
-            addCriterion("\"tenant name\" >=", value, "tenantName");
+            addCriterion("tenant_name >=", value, "tenantName");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameLessThan(String value) {
-            addCriterion("\"tenant name\" <", value, "tenantName");
+            addCriterion("tenant_name <", value, "tenantName");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameLessThanOrEqualTo(String value) {
-            addCriterion("\"tenant name\" <=", value, "tenantName");
+            addCriterion("tenant_name <=", value, "tenantName");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameLike(String value) {
-            addCriterion("\"tenant name\" like", value, "tenantName");
+            addCriterion("tenant_name like", value, "tenantName");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameNotLike(String value) {
-            addCriterion("\"tenant name\" not like", value, "tenantName");
+            addCriterion("tenant_name not like", value, "tenantName");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameIn(List<String> values) {
-            addCriterion("\"tenant name\" in", values, "tenantName");
+            addCriterion("tenant_name in", values, "tenantName");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameNotIn(List<String> values) {
-            addCriterion("\"tenant name\" not in", values, "tenantName");
+            addCriterion("tenant_name not in", values, "tenantName");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameBetween(String value1, String value2) {
-            addCriterion("\"tenant name\" between", value1, value2, "tenantName");
+            addCriterion("tenant_name between", value1, value2, "tenantName");
             return (Criteria) this;
         }
 
         public Criteria andTenantNameNotBetween(String value1, String value2) {
-            addCriterion("\"tenant name\" not between", value1, value2, "tenantName");
+            addCriterion("tenant_name not between", value1, value2, "tenantName");
             return (Criteria) this;
         }
 
