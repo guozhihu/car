@@ -42,7 +42,7 @@ public class CarReleaseServiceImpl implements CarReleaseService {
         } catch (Exception e) {
             Log.error("car release occur exception :" + e);
             response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getCode());
-            response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
+            response.setMsg(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
         } finally {
             Log.info("car release response->" + response);
         }

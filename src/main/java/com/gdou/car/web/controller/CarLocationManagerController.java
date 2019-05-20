@@ -1,5 +1,6 @@
 package com.gdou.car.web.controller;
 
+import com.gdou.car.business.car.dal.dto.carLocation.CarLocationAssociationResponse;
 import com.gdou.car.business.car.dal.dto.carLocation.CarLocationCreateRequest;
 import com.gdou.car.business.car.dal.dto.carLocation.CarLocationCreateResponse;
 import com.gdou.car.business.car.dal.dto.carLocation.CarLocationQueryListResponse;
@@ -43,12 +44,14 @@ public class CarLocationManagerController extends BaseController {
         data.setMessage(response.getMsg());
         return data;
     }
+    
+    @GetMapping("carLocation/city2addresses")
+    public ResponseData queryCity2Addresses() {
+        ResponseData data = new ResponseData();
+        CarLocationAssociationResponse response = carLocationService.queryCity2Addresses();
+        data.setData(response.getCity2AddressesValobjs());
+        data.setCode(response.getCode());
+        data.setMessage(response.getMsg());
+        return data;
+    }
 }
-
-/**
- ResponseData data = new ResponseData();
- 
- data.setCode(response.getCode());
- data.setMessage(response.getMsg());
- return data;
- */

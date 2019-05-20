@@ -43,6 +43,7 @@ public class LoginInterceptor /*implements HandlerInterceptor*/ extends HandlerI
         
         HandlerMethod handlerMethod=(HandlerMethod)handler;
         Object bean=handlerMethod.getBean();
+        System.err.println(bean);
         
         if(isAnoymous(handlerMethod)){
             return true;
@@ -54,7 +55,8 @@ public class LoginInterceptor /*implements HandlerInterceptor*/ extends HandlerI
         boolean isAjax=CookieUtil.isAjax(request);
         if(StringUtils.isEmpty(token)){
             if(isAjax){ // 判断是否是ajax请求
-                response.setContentType("text/html;charset=UTF-8");
+                // response.setContentType("text/html;charset=UTF-8");
+                response.setContentType("application/json;charset=UTF-8");
                 response.getWriter().write("{\"code\":\"-1\",\"msg\":\"error\"}");
                 return false;
             }

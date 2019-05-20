@@ -66,11 +66,11 @@ public class CarBrandServiceImpl implements CarBrandService {
             CarBrand carBrand = carBrandMapper.selectByPrimaryKey(brandId);
             response.setBrandName(carBrand.getBrandName());
             response.setCode(CarResponseCodeEnum.SUCCESS.getCode());
-            response.setCode(CarResponseCodeEnum.SUCCESS.getMsg());
+            response.setMsg(CarResponseCodeEnum.SUCCESS.getMsg());
         } catch (Exception e) {
             Log.error("query car brand occur exception :" + e);
             response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getCode());
-            response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
+            response.setMsg(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
         } finally {
             Log.info("query car brand response->" + response);
         }
@@ -92,14 +92,14 @@ public class CarBrandServiceImpl implements CarBrandService {
                 response.setCode(CarResponseCodeEnum.QUERY_DATA_NOT_EXIST.getCode());
                 response.setMsg(CarResponseCodeEnum.QUERY_DATA_NOT_EXIST.getMsg());
             } else {
-                response.setCode(CarResponseCodeEnum.SUCCESS.getCode());
-                response.setCode(CarResponseCodeEnum.SUCCESS.getMsg());
                 response.setCarBrands(carBrands);
+                response.setCode(CarResponseCodeEnum.SUCCESS.getCode());
+                response.setMsg(CarResponseCodeEnum.SUCCESS.getMsg());
             }
         } catch (Exception e) {
             Log.error(" occur exception :" + e);
             response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getCode());
-            response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
+            response.setMsg(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
         } finally {
             Log.info(" response->" + response);
         }

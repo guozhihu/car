@@ -1,5 +1,6 @@
 package com.gdou.car.business.car.service;
 
+import com.gdou.car.business.car.dal.dto.carLocation.CarLocationAssociationResponse;
 import com.gdou.car.business.car.dal.dto.carLocation.CarLocationCreateRequest;
 import com.gdou.car.business.car.dal.dto.carLocation.CarLocationCreateResponse;
 import com.gdou.car.business.car.dal.dto.carLocation.CarLocationQueryListResponse;
@@ -14,4 +15,6 @@ public interface CarLocationService {
     CarLocationCreateResponse createCarLocation(CarLocationCreateRequest request);
     
     CarLocationQueryListResponse queryAll();
+    
+    CarLocationAssociationResponse queryCity2Addresses();
 }

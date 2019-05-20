@@ -113,14 +113,4 @@ public class CarManagerController extends BaseController {
         return data;
     }
     
-    @GetMapping(value = "carInfo/carInfos")
-    public ResponseData queryCarInfos(){
-        ResponseData data = new ResponseData();
-        CarInfoQueryListResponse response = carInfoService.queryCarInfoAll();
-        data.setData(response.getCarInfoValobjs());
-        data.setCode(response.getCode());
-        data.setMessage(response.getMsg());
-        return data;
-    }
-    
 }

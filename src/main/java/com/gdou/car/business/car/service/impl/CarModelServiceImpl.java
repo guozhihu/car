@@ -45,7 +45,7 @@ public class CarModelServiceImpl implements CarModelService {
         } catch (Exception e) {
             Log.error("car model create occur exception :" + e);
             response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getCode());
-            response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
+            response.setMsg(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
         } finally {
             Log.info("car model create response->" + response);
         }
@@ -66,7 +66,7 @@ public class CarModelServiceImpl implements CarModelService {
         } catch (Exception e) {
             Log.error("car model query occur exception :" + e);
             response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getCode());
-            response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
+            response.setMsg(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
         } finally {
             Log.info("car model query response->" + response);
         }
@@ -95,7 +95,7 @@ public class CarModelServiceImpl implements CarModelService {
         } catch (Exception e) {
             Log.error("car model query all occur exception :" + e);
             response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getCode());
-            response.setCode(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
+            response.setMsg(CarResponseCodeEnum.SYSTEM_BUSY.getMsg());
         } finally {
             Log.info("car model query all response->" + response);
         }
