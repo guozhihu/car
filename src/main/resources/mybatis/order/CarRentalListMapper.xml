@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdou.car.business.order.dal.persistence.CarRentalListMapper" >
+  <resultMap id="BaseResultMap" type="com.gdou.car.business.order.dal.entitys.CarRentalList" >
+    <id column="list_id" property="listId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="tenant_name" property="tenantName" jdbcType="VARCHAR" />
+    <result column="car_id" property="carId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="contact_number" property="contactNumber" jdbcType="VARCHAR" />
+    <result column="order_get_date" property="orderGetDate" jdbcType="TIMESTAMP" />
+    <result column="order_back_date" property="orderBackDate" jdbcType="TIMESTAMP" />
+    <result column="renewal_date" property="renewalDate" jdbcType="TIMESTAMP" />
+    <result column="pick_up_location_id" property="pickUpLocationId" jdbcType="VARCHAR" />
+    <result column="returning_location_id" property="returningLocationId" jdbcType="VARCHAR" />
+    <result column="total_price" property="totalPrice" jdbcType="INTEGER" />
+    <result column="penalty" property="penalty" jdbcType="INTEGER" />
+    <result column="style_name" property="styleName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gdou.car.business.order.dal.entitys.CarRentalList" extends="BaseResultMap" >
+    <result column="remarks" property="remarks" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    list_id, user_id, tenant_name, car_id, create_time, contact_number, order_get_date, 
+    order_back_date, renewal_date, pick_up_location_id, returning_location_id, total_price, 
+    penalty, style_name
+  </sql>
+  <sql id="Blob_Column_List" >
+    remarks
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.gdou.car.business.order.dal.entitys.CarRentalListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from car_rental_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdou.car.business.order.dal.entitys.CarRentalListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car_rental_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from car_rental_list
+    where list_id = #{listId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car_rental_list
+    where list_id = #{listId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdou.car.business.order.dal.entitys.CarRentalListExample" >
+    delete from car_rental_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdou.car.business.order.dal.entitys.CarRentalList" >
+    insert into car_rental_list (list_id, user_id, tenant_name, 
+      car_id, create_time, contact_number, 
+      order_get_date, order_back_date, renewal_date, 
+      pick_up_location_id, returning_location_id, 
+      total_price, penalty, style_name, 
+      remarks)
+    values (#{listId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{tenantName,jdbcType=VARCHAR}, 
+      #{carId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{contactNumber,jdbcType=VARCHAR}, 
+      #{orderGetDate,jdbcType=TIMESTAMP}, #{orderBackDate,jdbcType=TIMESTAMP}, #{renewalDate,jdbcType=TIMESTAMP}, 
+      #{pickUpLocationId,jdbcType=VARCHAR}, #{returningLocationId,jdbcType=VARCHAR}, 
+      #{totalPrice,jdbcType=INTEGER}, #{penalty,jdbcType=INTEGER}, #{styleName,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdou.car.business.order.dal.entitys.CarRentalList" >
+    insert into car_rental_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="listId != null" >
+        list_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="tenantName != null" >
+        tenant_name,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="contactNumber != null" >
+        contact_number,
+      </if>
+      <if test="orderGetDate != null" >
+        order_get_date,
+      </if>
+      <if test="orderBackDate != null" >
+        order_back_date,
+      </if>
+      <if test="renewalDate != null" >
+        renewal_date,
+      </if>
+      <if test="pickUpLocationId != null" >
+        pick_up_location_id,
+      </if>
+      <if test="returningLocationId != null" >
+        returning_location_id,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="penalty != null" >
+        penalty,
+      </if>
+      <if test="styleName != null" >
+        style_name,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="listId != null" >
+        #{listId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="tenantName != null" >
+        #{tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contactNumber != null" >
+        #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderGetDate != null" >
+        #{orderGetDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderBackDate != null" >
+        #{orderBackDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="renewalDate != null" >
+        #{renewalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pickUpLocationId != null" >
+        #{pickUpLocationId,jdbcType=VARCHAR},
+      </if>
+      <if test="returningLocationId != null" >
+        #{returningLocationId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="penalty != null" >
+        #{penalty,jdbcType=INTEGER},
+      </if>
+      <if test="styleName != null" >
+        #{styleName,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdou.car.business.order.dal.entitys.CarRentalListExample" resultType="java.lang.Integer" >
+    select count(*) from car_rental_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update car_rental_list
+    <set >
+      <if test="record.listId != null" >
+        list_id = #{record.listId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantName != null" >
+        tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carId != null" >
+        car_id = #{record.carId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.contactNumber != null" >
+        contact_number = #{record.contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderGetDate != null" >
+        order_get_date = #{record.orderGetDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderBackDate != null" >
+        order_back_date = #{record.orderBackDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.renewalDate != null" >
+        renewal_date = #{record.renewalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pickUpLocationId != null" >
+        pick_up_location_id = #{record.pickUpLocationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returningLocationId != null" >
+        returning_location_id = #{record.returningLocationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalPrice != null" >
+        total_price = #{record.totalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.penalty != null" >
+        penalty = #{record.penalty,jdbcType=INTEGER},
+      </if>
+      <if test="record.styleName != null" >
+        style_name = #{record.styleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update car_rental_list
+    set list_id = #{record.listId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+      car_id = #{record.carId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      contact_number = #{record.contactNumber,jdbcType=VARCHAR},
+      order_get_date = #{record.orderGetDate,jdbcType=TIMESTAMP},
+      order_back_date = #{record.orderBackDate,jdbcType=TIMESTAMP},
+      renewal_date = #{record.renewalDate,jdbcType=TIMESTAMP},
+      pick_up_location_id = #{record.pickUpLocationId,jdbcType=VARCHAR},
+      returning_location_id = #{record.returningLocationId,jdbcType=VARCHAR},
+      total_price = #{record.totalPrice,jdbcType=INTEGER},
+      penalty = #{record.penalty,jdbcType=INTEGER},
+      style_name = #{record.styleName,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update car_rental_list
+    set list_id = #{record.listId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+      car_id = #{record.carId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      contact_number = #{record.contactNumber,jdbcType=VARCHAR},
+      order_get_date = #{record.orderGetDate,jdbcType=TIMESTAMP},
+      order_back_date = #{record.orderBackDate,jdbcType=TIMESTAMP},
+      renewal_date = #{record.renewalDate,jdbcType=TIMESTAMP},
+      pick_up_location_id = #{record.pickUpLocationId,jdbcType=VARCHAR},
+      returning_location_id = #{record.returningLocationId,jdbcType=VARCHAR},
+      total_price = #{record.totalPrice,jdbcType=INTEGER},
+      penalty = #{record.penalty,jdbcType=INTEGER},
+      style_name = #{record.styleName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdou.car.business.order.dal.entitys.CarRentalList" >
+    update car_rental_list
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="tenantName != null" >
+        tenant_name = #{tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contactNumber != null" >
+        contact_number = #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderGetDate != null" >
+        order_get_date = #{orderGetDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderBackDate != null" >
+        order_back_date = #{orderBackDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="renewalDate != null" >
+        renewal_date = #{renewalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pickUpLocationId != null" >
+        pick_up_location_id = #{pickUpLocationId,jdbcType=VARCHAR},
+      </if>
+      <if test="returningLocationId != null" >
+        returning_location_id = #{returningLocationId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="penalty != null" >
+        penalty = #{penalty,jdbcType=INTEGER},
+      </if>
+      <if test="styleName != null" >
+        style_name = #{styleName,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where list_id = #{listId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gdou.car.business.order.dal.entitys.CarRentalList" >
+    update car_rental_list
+    set user_id = #{userId,jdbcType=BIGINT},
+      tenant_name = #{tenantName,jdbcType=VARCHAR},
+      car_id = #{carId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      contact_number = #{contactNumber,jdbcType=VARCHAR},
+      order_get_date = #{orderGetDate,jdbcType=TIMESTAMP},
+      order_back_date = #{orderBackDate,jdbcType=TIMESTAMP},
+      renewal_date = #{renewalDate,jdbcType=TIMESTAMP},
+      pick_up_location_id = #{pickUpLocationId,jdbcType=VARCHAR},
+      returning_location_id = #{returningLocationId,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=INTEGER},
+      penalty = #{penalty,jdbcType=INTEGER},
+      style_name = #{styleName,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=LONGVARCHAR}
+    where list_id = #{listId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdou.car.business.order.dal.entitys.CarRentalList" >
+    update car_rental_list
+    set user_id = #{userId,jdbcType=BIGINT},
+      tenant_name = #{tenantName,jdbcType=VARCHAR},
+      car_id = #{carId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      contact_number = #{contactNumber,jdbcType=VARCHAR},
+      order_get_date = #{orderGetDate,jdbcType=TIMESTAMP},
+      order_back_date = #{orderBackDate,jdbcType=TIMESTAMP},
+      renewal_date = #{renewalDate,jdbcType=TIMESTAMP},
+      pick_up_location_id = #{pickUpLocationId,jdbcType=VARCHAR},
+      returning_location_id = #{returningLocationId,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=INTEGER},
+      penalty = #{penalty,jdbcType=INTEGER},
+      style_name = #{styleName,jdbcType=VARCHAR}
+    where list_id = #{listId,jdbcType=VARCHAR}
+  </update>
+</mapper>

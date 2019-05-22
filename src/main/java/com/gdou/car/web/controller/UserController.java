@@ -6,6 +6,7 @@ import com.gdou.car.business.user.dal.dto.UserRegisterRequest;
 import com.gdou.car.business.user.dal.dto.UserRegisterResponse;
 import com.gdou.car.business.user.service.UserService;
 import com.gdou.car.common.annotation.Anoymous;
+import com.gdou.car.common.base.BaseController;
 import com.gdou.car.web.controller.support.ResponseData;
 import com.gdou.car.web.controller.support.ResponseEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping("user")
-public class UserController extends BaseController{
+public class UserController extends BaseController {
     
     @Autowired
     UserService userService;
